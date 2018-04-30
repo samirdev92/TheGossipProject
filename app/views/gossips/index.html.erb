@@ -7,10 +7,20 @@
 
 </div>
 
+
 <% @gossips.each do |gossip| %>
 	<dl style="margin-left: 30px;">
 	    <dt>Le gossip posté par <%= gossip.anonymous_author %>:</dt>
 	    <dd><%= gossip.content %></dd>
+   		<a href= "<%= gossip_path(gossip.id) %>" class="btn btn-primary">Consulter la page du gossip</a><br />
 	</dl>
 <% end %>
+
+
+
+<h2 style="margin-left: 30px;"> Tu as aimé nos gossips? N'hésite pas à créer le tien: <a href= "<%= new_gossip_path %>" class="btn btn-danger">Par ici!</a></h2>
+
+
+
+
 </body>
