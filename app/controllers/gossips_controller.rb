@@ -5,8 +5,12 @@ class GossipsController < ApplicationController
   end
 
   def create
-  	@gossip = Gossip.create(gossip_params)
-    redirect_to gossip_path(@gossip.id)
+  	@gossip = Gossip.new(gossip_params)
+    if @gossip.save
+      redirect_to gossip_path(@gossip.id)
+    else 
+      redirect_to error_path
+    end
   end
 
   def show
@@ -33,6 +37,7 @@ class GossipsController < ApplicationController
 
   def index
   	@gossips = Gossip.all
+  	puts @gossips.class
   end
 
 

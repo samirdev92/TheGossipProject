@@ -1,15 +1,21 @@
-<html>
-  <body>
+<div class="center jumbotron">
 
   <h1>Ton gossip a bien été enregistré !</h1>
 
-  <p>Voici <%= @gossip.anonymous_author %> un récap de ton gossip:</p> 
-    <%= @gossip.content %><br />
+  <p><strong><%= @gossip.anonymous_author %></strong>, voici un récap de ton gossip:</p> 
+  <h3><%= @gossip.content %></h3>
 
-  <a href= "<%= edit_gossip_path %>" class="btn btn-danger">Tu veux éditer ton gossip? Appuie là!</a><br />
-  <a href= "<%= gossips_path %>" class="btn btn-primary">Revenir à la liste de tous les gossips!</a><br />
-  <div class="btn btn-primary"> <%= link_to 'Clique pour détruire', @gossip, method: :delete %> </div> 
+</div>
 
+  <div class = "form-group">
+    <a href= "<%= edit_gossip_path %>" class="btn btn-info">Tu veux éditer ton gossip? Appuie là!</a><br />
+  </div>
+  
+  <div class = "form-group">
+    <a href= "<%= gossips_path %>" class="btn btn-primary">Revenir à la liste de tous les gossips</a><br />
+  </div>
 
-  </body>
-</html>
+  <div class = "form-group">
+    <a href="<%= gossip_path(@gossip.id) %>"  class="btn btn-danger" data-method="DELETE" data-confirm="Dernier mot?">Supprimer le gossip</a>
+  </div>
+

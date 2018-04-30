@@ -1,16 +1,27 @@
-<html>
-  <body>
+<div class="center jumbotron">
 
   <h1>Apparemment, tu veux modifier ton Gossip !</h1>
+  <h3>Heureusement pour toi, on a tout prévu...</h3>
 
-      <%= form_for @gossip, url: {action: "update"} do |f| %>
-        Tu veux changer ton nom de super-héros? Vas-y :)<br />
-        <%= f.text_field :anonymous_author %><br />
+</div>
 
-        Si tu veux éditer ton gossip, écris-en un nouveau!<br />
-        <%= f.text_area :content %><br />
-        <button class= "btn btn-default">Soumettre mon nouveau formulaire!</button> <!-- ou: <%= f.submit "Submit" %> -->
-      <% end %>
 
-  </body>
-</html>
+
+<%= form_for @gossip, url: {action: "update"} do |f| %>
+  <div class = "form-group">
+    Tu veux changer ton nom de super-héros? Vas-y :)<br />
+    <%= f.text_field :anonymous_author %><br />
+  </div>
+
+  <div class = "form-group">
+    Si tu veux éditer ton gossip, écris-en un nouveau!<br />
+    <%= f.text_area :content %><br />
+  </div>
+
+  <div class = "form-group">
+    <button class= "btn btn-default">Soumettre mon nouveau formulaire!</button> <!-- ou: <%= f.submit "Submit" %> -->
+  </div>
+
+<% end %>
+
+
