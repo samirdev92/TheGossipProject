@@ -1,0 +1,16 @@
+<html>
+  <body>
+
+  <h1>Apparemment, tu veux modifier ton Gossip !</h1>
+
+      <%= form_for @gossip, url: {action: "update"} do |f| %>
+        Tu veux changer ton nom de super-héros? Vas-y :)<br />
+        <%= f.text_field :anonymous_author %><br />
+
+        Si tu veux éditer ton gossip, écris-en un nouveau!<br />
+        <%= f.text_area :content %><br />
+        <button class= "btn btn-default">Soumettre mon nouveau formulaire!</button> <!-- ou: <%= f.submit "Submit" %> -->
+      <% end %>
+
+  </body>
+</html>

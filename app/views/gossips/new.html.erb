@@ -1,0 +1,18 @@
+<html>
+  <body>
+
+  <h1>Bienvenue sur la page des Gossips !</h1>
+
+  <p>Ici, tu vas pouvoir écrire ce qui te passe par la tête, de manière anonyme.</p> 
+
+      <%= form_for @gossip, url: {action: "create"} do |f| %>
+        Indique ton nom de super-héros que tu seras le seul à connaître :)<br />
+        <%= f.text_field :anonymous_author %><br />
+
+        Ecris ici le petit gossip ou mot doux que tu veux adresser:<br />
+        <%= f.text_area :content %><br />
+        <button class= "btn btn-default">Soumettre mon formulaire!</button> <!-- ou: <%= f.submit "Submit" %> -->
+      <% end %>
+
+  </body>
+</html>

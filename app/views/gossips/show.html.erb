@@ -1,0 +1,15 @@
+<html>
+  <body>
+
+  <h1>Ton gossip a bien été enregistré !</h1>
+
+  <p>Voici <%= @gossip.anonymous_author %> un récap de ton gossip:</p> 
+    <%= @gossip.content %><br />
+
+  <a href= "<%= edit_gossip_path %>" class="btn btn-danger">Tu veux éditer ton gossip? Appuie là!</a><br />
+  <a href= "<%= gossips_path %>" class="btn btn-primary">Revenir à la liste de tous les gossips!</a><br />
+  <div class="btn btn-primary"> <%= link_to 'Clique pour détruire', @gossip, method: :delete %> </div> 
+
+
+  </body>
+</html>

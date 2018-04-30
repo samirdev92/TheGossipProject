@@ -1,0 +1,7 @@
+<h1> Retrouve ici tous les Gossips! </h1>
+
+<%= @gossips.each do |gossip| %>
+    <p><%= gossip.anonymous_author %></p>
+    <p><%= gossip.content %></p>
+<% end %>
+
