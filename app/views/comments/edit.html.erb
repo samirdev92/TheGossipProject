@@ -1,29 +1,41 @@
-<div class="center jumbotron">
+<body>
 
-  <h1>Apparemment, tu veux modifier ton commentaire !</h1>
-  <h3>Heureusement pour toi, on a tout prévu...</h3>
+<!-- ################################# AFFICHAGE DU COMMENT ################################### -->
+
+  <div class="center jumbotron">
+
+    <h1>Apparemment, tu veux modifier ton commentaire !</h1>
+    <h3>Heureusement pour toi, on a tout prévu...</h3>
+
+  </div>
+
+
+<!-- ########################## FORMULAIRE D'ÉDITION DU COMMENTAIRE ############################### -->
+
+  <div class = row style="margin-left: 30px;">
+
+    <%= form_for @comment, url: {action: "update"} do |f| %>
+
+      <div class = "form-group">
+        Tu veux changer ton nom de commentateur:<br />
+        <%= f.text_field :anonymous_commentator %><br />
+      </div>
+
+      <div class = "form-group">
+        Si tu veux éditer ton commentaire, c'est par ici:<br />
+        <%= f.text_area :body %><br />
+      </div>
+
+      <div class = "form-group">
+        <button class= "btn btn-default">Soumettre mon nouveau commentaire!</button> 
+      </div>
+
+      <div class = "form-group">
+        <%= link_to 'Supprimer le commentaire', gossip_comment_path(@gossip, @comment), method: :delete, class: "btn btn-danger" %> 
+      </div>
+      
+<!-- On fait appel au path qui nous permet de retrouver le commentaire que l'on veut supprimer (en indiquant deux paramètres, le gossip et le comment) et on lui applique la méthode delete. -->
+    <% end %>
 
 </div>
-
-
-
-<%= form_for @comment, url: {action: "update"} do |f| %>
-  <div class = "form-group">
-    Tu veux changer ton nom de commentateur:<br />
-    <%= f.text_field :anonymous_commentator %><br />
-  </div>
-
-  <div class = "form-group">
-    Si tu veux éditer ton commentaire, c'est par ici:<br />
-    <%= f.text_area :body %><br />
-  </div>
-
-  <div class = "form-group">
-    <button class= "btn btn-default">Soumettre mon nouveau commentaire!</button> 
-  </div>
-
-
-  
-<% end %>
-
               

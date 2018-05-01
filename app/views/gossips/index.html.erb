@@ -1,24 +1,29 @@
 <body>
-<div class="center jumbotron">
 
-	<h1>Retrouve ici tous les Gossips!</h1>
+<!-- ################################# PAGE DE PRESENTATION ################################### -->
 
-	<h3>Ici, tu vas retrouver tous les potins de THP...</h3> 
+	<div class="center jumbotron">
 
-</div>
+		<h1>Retrouve ici tous les Gossips!</h1>
+		<h3>Ici, tu vas retrouver tous les potins de THP...</h3> 
 
-
-<% @gossips.each do |gossip| %>
-	<dl style="margin-left: 30px;">
-	    <dt>Le gossip posté par <%= gossip.anonymous_author %>:</dt>
-	    <dd><%= gossip.content %></dd>
-   		<a href= "<%= gossip_path(gossip.id) %>" class="btn btn-primary">Consulter la page du gossip</a><br />
-	</dl>
-<% end %>
+	</div>
 
 
+<!-- ################################# AFFICHAGE DE L'INDEX ################################### -->
 
-<h2 style="margin-left: 30px;"> Tu as aimé nos gossips? N'hésite pas à créer le tien: <a href= "<%= new_gossip_path %>" class="btn btn-danger">Par ici!</a></h2>
+	<% @gossips.each do |gossip| %>
+
+		<dl style="margin-left: 30px;">
+		    <dt>Gossip posté par <%= gossip.anonymous_author %> (<%= gossip.comments.count %> comments):</dt>
+		    <dd><%= gossip.content %></dd>
+	   		<a href= "<%= gossip_path(gossip.id) %>" class="btn btn-primary">Consulter la page du gossip</a><br />
+		</dl>
+
+	<% end %>
+	
+
+	<h2 style="margin-left: 30px;"> Tu as aimé nos gossips? N'hésite pas à créer le tien: <a href= "<%= new_gossip_path %>" class="btn btn-danger">Par ici!</a></h2>
 
 
 </body>

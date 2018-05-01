@@ -1,31 +1,43 @@
-<div class="center jumbotron">
+<body>
 
-  <h1>Apparemment, tu veux modifier ton Gossip !</h1>
-  <h3>Heureusement pour toi, on a tout prévu...</h3>
+<!-- ################################# AFFICHAGE DE L'ÉDIT ################################### -->
 
-</div>
+  <div class="center jumbotron">
 
+    <h1>Apparemment, tu veux modifier ton Gossip !</h1>
+    <h3>Heureusement pour toi, on a tout prévu...</h3>
 
-
-<%= form_for @gossip, url: {action: "update"} do |f| %>
-  <div class = "form-group">
-    Tu veux changer ton nom de super-héros? Vas-y :)<br />
-    <%= f.text_field :anonymous_author %><br />
   </div>
 
-  <div class = "form-group">
-    Si tu veux éditer ton gossip, écris-en un nouveau!<br />
-    <%= f.text_area :content %><br />
-  </div>
 
-  <div class = "form-group">
-    <button class= "btn btn-default">Soumettre mon nouveau formulaire!</button> <!-- ou: <%= f.submit "Submit" %> -->
-  </div>
+<!-- ########################## FORMULAIRE D'ÉDITION DU GOSSIP ############################### -->
 
-  <div class = "form-group">
-    <a href="<%= gossip_path(@gossip.id) %>"  class="btn btn-danger" data-method="DELETE" data-confirm="Dernier mot?">Supprimer le gossip</a>
-  </div>
-  
-<% end %>
 
+  <div class = row style="margin-left: 30px;">
+
+<!-- L'action Update permet de faire appel à la méthode Patch. -->
+
+    <%= form_for @gossip, url: {action: "update"} do |f| %>
+
+      <div class = "form-group">
+        Tu veux changer ton nom de super-héros? Vas-y :)<br />
+        <%= f.text_field :anonymous_author %><br />
+      </div>
+
+      <div class = "form-group">
+        Si tu veux éditer ton gossip, écris-en un nouveau!<br />
+        <%= f.text_area :content %><br />
+      </div>
+
+      <div class = "form-group">
+        <button class= "btn btn-default">Soumettre mon nouveau formulaire!</button> 
+      </div>
+
+      <div class = "form-group">
+        <a href="<%= gossip_path(@gossip.id) %>"  class="btn btn-danger" data-method="DELETE" data-confirm="C'est ton dernier mot?">Supprimer le gossip</a>
+      </div>
+    
+  <% end %>
+
+</body>
 
