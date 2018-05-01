@@ -1,25 +1,57 @@
+<body>
+
+
 <div class="center jumbotron">
 
-  <h1>Ton gossip a bien été enregistré !</h1>
+  <h3>Voici le gossip écrit par <strong><%= @gossip.anonymous_author %></strong>:</h3>
+  <p><%= @gossip.content %></p>
 
-  <p><strong><%= @gossip.anonymous_author %></strong>, voici un récap de ton gossip:</p> 
-  <h3><%= @gossip.content %></h3>
-
-  <div class = form-row>
+  <div class = row>
     <div class = "col-4">
-      <a href= "<%= edit_gossip_path %>" class="btn btn-info">Tu veux éditer ton gossip? Appuie là!</a><br />
+      <a href= "<%= edit_gossip_path %>" class="btn btn-info">Pour éditer le gossip, c'est par là</a><br />
     </div>
     
     <div class = "col-4">
       <a href= "<%= gossips_path %>" class="btn btn-primary">Revenir à la liste de tous les gossips</a><br />
     </div>
-
-    <div class = "col-4">
-      <a href= "<%= new_gossip_comment_path(@gossip.id) %>" class="btn btn-success">Tu veux commenter ce gossip?</a><br />
-    </div>
   </div>
 
 </div>
 
-<%= render "comments/index" %>
 
+
+<h3>Ici, tu vas pouvoir écrire le commentaire que tu veux sur l'article selectionné.</h3> 
+
+<%= form_for [@gossip, @comment] do |f| %>
+
+  <%= f.hidden_field :gossip_id, value: @gossip.id %>
+
+  <div class = "form-group">
+    Indique ici ton nom cher commentateur<br />
+    <%= f.text_field :anonymous_commentator %><br />
+  </div>
+
+  <div class = "form-group">
+    Ecris ici ton petit commentaire:<br />
+    <%= f.text_area :body %><br />
+  </div>
+
+  <div class = "form-group">
+    <button class= "btn btn-default">Soumettre mon commentaire!</button> 
+  </div>
+
+<% end %>
+
+
+<h3>Retrouve ici tous les commentaires déjà postés sur cet article:</h3>
+
+<% @comments.each do |comment| %>
+  <dl style="margin-left: 30px;">
+      <dt>Le comment posté par <%= comment.anonymous_commentator %>:</dt>
+      <dd><%= comment.body %></dd>
+      <a href= "<%=  edit_gossip_comment_path(@gossip.id,comment.id) %>" class="btn btn-primary">Editer le commentaire</a><br />
+  </dl>
+
+<% end %>
+
+</body>

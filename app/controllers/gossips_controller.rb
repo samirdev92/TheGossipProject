@@ -15,8 +15,15 @@ class GossipsController < ApplicationController
 
   def show
   	@gossip = Gossip.find(params[:id])
+    @comment = Comment.new
+    @comments = Comment.where(gossip_id: params[:id])
   end
 
+
+  def index
+    @gossips = Gossip.all
+    puts @gossips.class
+  end
 
 
   def edit
@@ -35,10 +42,7 @@ class GossipsController < ApplicationController
   	redirect_to gossips_path
   end
 
-  def index
-  	@gossips = Gossip.all
-  	puts @gossips.class
-  end
+
 
 
   private

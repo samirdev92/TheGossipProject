@@ -1,29 +1,46 @@
 class CommentsController < ApplicationController
 
 	def new
+	  @gossip = Gossip.find(params[:gossip_id])	
 	  @comment = Comment.new
 	end
 
 	def create
-	  @comment = Comment.new(comment_params)
-	  @comment.gossip_id = params.permit![:gossip_id] 
-	  #@comment.anonymous_commentator = params[:comment][:anonymous_commentator]
-	  #@comment.body = params[:comment][:body]
-	  @comment.save
+	  @gossip = Gossip.find(params[:gossip_id])	
+	  @comment = Comment.create(comment_params)
 	  redirect_to gossip_path(@comment.gossip_id)
 	end
 
-	def index
-	  @comments = Comment.all
+
+	def edit
+      @gossip = Gossip.find(params[:gossip_id])	
+	  @comment = @gossip.comments.find(params[:id])
+
+    end
+
+    def update
+      @gossip = Gossip.find(params[:gossip_id])	
+	  @comment = @gossip.comments.find(params[:id])
+  	  @comment.update(comment_params)
+	  redirect_to gossip_path(@comment.gossip_id)
+    end
+
+	def destroy
+	  @gossip = Gossip.find(params[:gossip_id])	
+	  @comment = @gossip.comments.find(params[:id])
+	  @gossip.destroy
+	  redirect_to gossip_path(@comment.gossip_id)
+
 	end
+
+
 
 	private
 
     def comment_params 
-	  params.require(:comment).permit(:anonymous_commentator, :body)
+	  params.require(:comment).permit(:anonymous_commentator, :body, :gossip_id)
     end
 
 end
-
 
 

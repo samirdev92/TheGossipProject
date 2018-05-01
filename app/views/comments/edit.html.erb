@@ -1,0 +1,29 @@
+<div class="center jumbotron">
+
+  <h1>Apparemment, tu veux modifier ton commentaire !</h1>
+  <h3>Heureusement pour toi, on a tout prévu...</h3>
+
+</div>
+
+
+
+<%= form_for @comment, url: {action: "update"} do |f| %>
+  <div class = "form-group">
+    Tu veux changer ton nom de commentateur:<br />
+    <%= f.text_field :anonymous_commentator %><br />
+  </div>
+
+  <div class = "form-group">
+    Si tu veux éditer ton commentaire, c'est par ici:<br />
+    <%= f.text_area :body %><br />
+  </div>
+
+  <div class = "form-group">
+    <button class= "btn btn-default">Soumettre mon nouveau commentaire!</button> 
+  </div>
+
+
+  
+<% end %>
+
+              
