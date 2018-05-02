@@ -16,9 +16,8 @@ class GossipsController < ApplicationController
   def show
   	@gossip = Gossip.find(params[:id]) #On affiche ici la page spécifique au gossip choisi, que l'on retrouve grâce à son ID
     @comment = Comment.new #Lignes nécessaires car on veut afficher les commentaires sur la page du gossip
-    @comments = Comment.where(gossip_id: params[:id]) #On ne s'intéresse aux comments que du gossip de la page
+    @comments = @gossip.comments #On ne s'intéresse aux comments que du gossip de la page
   end
-
 
   def index
     @gossips = Gossip.all

@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
  def update
     @gossip = Gossip.find(params[:gossip_id])	
     @comment = @gossip.comments.find(params[:id])
-	@comment.update(comment_params)
+	  @comment.update(comment_params)
     redirect_to gossip_path(@comment.gossip_id)
   end
 
