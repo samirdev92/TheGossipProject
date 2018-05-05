@@ -25,5 +25,3 @@ Sur notre blog, tu pourras:
 9. L'index t'indique tous les gossips et leur nombre de commentaires
 
 Plus de détails dans les sous-dossiers.
-
-Tu trouveras mon lien Heroku ici: https://enigmatic-island-56606.herokuapp.com/
