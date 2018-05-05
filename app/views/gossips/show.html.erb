@@ -37,8 +37,6 @@
 
     <%= form_for [@gossip, @comment] do |f| %>
 
-      <%= f.hidden_field :gossip_id, value: @gossip.id %>
-
       <div class = "form-group">
         Indique ici ton nom cher commentateur<br />
         <%= f.text_field :anonymous_commentator %><br />

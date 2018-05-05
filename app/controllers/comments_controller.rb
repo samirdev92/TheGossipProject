@@ -1,43 +1,45 @@
 class CommentsController < ApplicationController
+  before_action :find_gossip
+  before_action :find_comment, only: %i[edit update destroy]
 
   def new
-    @gossip = Gossip.find(params[:gossip_id]) #Permet de s'assurer que l'on est bien sur le bon gossip: celui de notre commentaire
-    @comment = Comment.new #on instancie un nouveau comment
+    # On instancie un nouveau comment
+    @comment = @gossip.comments.new
   end
 
   def create
-    @gossip = Gossip.find(params[:gossip_id])	
-    @comment = Comment.create(comment_params) #On passe les params du formulaire pour créer un nouveau comment
-    redirect_to gossip_path(@comment.gossip_id) #On renvoie vers la page du gossip
-  end
+    # On passe les params du formulaire pour creer un nouveau comment
+    @comment = @gossip.comments.create(comment_params)
 
+    # On renvoie vers la page du gossip
+    redirect_to gossip_path(@gossip)
+  end
 
   def edit
-    @gossip = Gossip.find(params[:gossip_id])	
-    @comment = @gossip.comments.find(params[:id]) #On ne s'intéresse qu'à un comment en particulier, que l'on retrouve grâce à son ID
+    # The work is done by the find_gossip & find_comment before_actions
   end
 
- def update
-    @gossip = Gossip.find(params[:gossip_id])	
-    @comment = @gossip.comments.find(params[:id])
-	  @comment.update(comment_params)
-    redirect_to gossip_path(@comment.gossip_id)
+  def update
+    @comment.update(comment_params)
+    redirect_to gossip_path(@gossip)
   end
 
   def destroy
-    @gossip = Gossip.find(params[:gossip_id])	
-    @comment = @gossip.comments.find(params[:id])
     @comment.destroy
-    redirect_to gossip_path(@comment.gossip_id)
-end
-
+    redirect_to gossip_path(@gossip)
+  end
 
   private
 
-  def comment_params 
-    params.require(:comment).permit(:anonymous_commentator, :body, :gossip_id) #on a réussi à passer le gossip_id dans notre hash grâce au field particulier qu'on a rajouté dans notre form
+  def find_gossip
+    @gossip = Gossip.find(params[:gossip_id])
   end
 
+  def find_comment
+    @comment = @gossip.comments.find(params[:id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:anonymous_commentator, :body)
+  end
 end
-
-
