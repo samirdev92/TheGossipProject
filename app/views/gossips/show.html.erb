@@ -4,7 +4,7 @@
 
   <!-- Différence d'affichage du gossip en fonction de si le current user en est l'auteur ou non -->
 
-  <% if current_moussaillon.id == @gossip.moussaillon_id %>
+  <% if current_moussaillon&.id == @gossip.moussaillon_id %>
 
     <h3>Voici ton gossip <%= @gossip_anonymous_author %>:</h3>
     <p><strong><%= @gossip.content %></strong></p>
@@ -22,7 +22,7 @@
     </div>
 
   <% else %>
-  
+
     <h3>Voici le gossip de <%= @gossip_anonymous_author %>:</h3>
     <p><strong><%= @gossip.content %></strong></p>
 
@@ -56,7 +56,6 @@
   </div>
 
 
-  
   <h3 style="margin-left: 30px;">Retrouve ici les commentaires déjà postés sur cet article.</h3>
 
     <% @gossip.comments.each do |comment| %>
@@ -64,7 +63,8 @@
       <dl style="margin-left: 30px;">
           <dt>Le comment posté par <%= comment.anonymous_commentator %>:</dt>
           <dd><%= comment.body %></dd>
-          <a href= "<%=  edit_gossip_comment_path(@gossip.id,comment.id) %>" class="btn btn-primary">Editer le commentaire</a><br />
+          <%= link_to "Editer le commentaire", edit_gossip_comment_path(@gossip, comment), class: "btn btn-primary" %>
+          <br />
       </dl>
 
     <% end %>
