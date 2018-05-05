@@ -4,7 +4,7 @@
 
   <!-- Différence d'affichage du gossip en fonction de si le current user en est l'auteur ou non -->
 
-  <% if current_moussaillon.id == @gossip.moussaillon_id %>
+  <% if current_moussaillon&.id == @gossip.moussaillon_id %>
 
     <h3>Voici ton gossip <%= @gossip_anonymous_author %>:</h3>
     <p><strong><%= @gossip.content %></strong></p>
@@ -22,7 +22,7 @@
     </div>
 
   <% else %>
-  
+
     <h3>Voici le gossip de <%= @gossip_anonymous_author %>:</h3>
     <p><strong><%= @gossip.content %></strong></p>
 
@@ -36,8 +36,6 @@
   <div class = row style="margin-left: 30px;">
 
     <%= form_for [@gossip, @comment] do |f| %>
-
-      <%= f.hidden_field :gossip_id, value: @gossip.id %>
 
       <div class = "form-group">
         Indique ici ton nom cher commentateur<br />
@@ -58,15 +56,15 @@
   </div>
 
 
-  
   <h3 style="margin-left: 30px;">Retrouve ici les commentaires déjà postés sur cet article.</h3>
 
-    <% @comments.each do |comment| %>
+    <% @gossip.comments.each do |comment| %>
 
       <dl style="margin-left: 30px;">
           <dt>Le comment posté par <%= comment.anonymous_commentator %>:</dt>
           <dd><%= comment.body %></dd>
-          <a href= "<%=  edit_gossip_comment_path(@gossip.id,comment.id) %>" class="btn btn-primary">Editer le commentaire</a><br />
+          <%= link_to "Editer le commentaire", edit_gossip_comment_path(@gossip, comment), class: "btn btn-primary" %>
+          <br />
       </dl>
 
     <% end %>

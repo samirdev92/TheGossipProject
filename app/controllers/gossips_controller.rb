@@ -1,24 +1,24 @@
 class GossipsController < ApplicationController
+  before_action :find_gossip, only: %i[show edit update destroy]
 
   def new
-  	@gossip = Gossip.new
+    @gossip = Gossip.new
   end
 
   def create
-  	@gossip = Gossip.new(gossip_params) 
-    @gossip.moussaillon_id = current_moussaillon.id if current_moussaillon
-    if @gossip.save
-      redirect_to gossip_path(@gossip.id)
-    else 
-      redirect_to error_path 
+    gossip = Gossip.new(gossip_params)
+    gossip.moussaillon = current_moussaillon
+
+    if gossip.save
+      redirect_to gossip_path(gossip)
+    else
+      redirect_to error_path
     end
   end
 
   def show
-  	@gossip = Gossip.find(params[:id])
-    @gossip_anonymous_author = Moussaillon.find(@gossip.moussaillon_id).anonymous_username
-    @comment = Comment.new 
-    @comments = @gossip.comments 
+    @gossip_anonymous_author = @gossip.moussaillon&.anonymous_username
+    @comment = Comment.new
   end
 
   def index
@@ -26,26 +26,26 @@ class GossipsController < ApplicationController
   end
 
   def edit
-    @gossip = Gossip.find(params[:id]) 
+    # All is done in the find_gossip before_action
   end
 
   def update
-  	@gossip = Gossip.find(params[:id]) 
-  	@gossip.update(gossip_params) 
-    redirect_to gossip_path(@gossip.id)
+    @gossip.update(gossip_params)
+    redirect_to gossip_path(@gossip)
   end
 
   def destroy
-  	@gossip = Gossip.find(params[:id]) 
-  	@gossip.destroy 
-  	redirect_to gossips_path
+    @gossip.destroy
+    redirect_to gossips_path
   end
-
 
   private
 
-  def gossip_params 
-	params.require(:gossip).permit(:content) 
+  def find_gossip
+    @gossip = Gossip.find(params[:id])
   end
 
+  def gossip_params
+    params.require(:gossip).permit(:content)
+  end
 end

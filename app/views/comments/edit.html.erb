@@ -27,14 +27,14 @@
       </div>
 
       <div class = "form-group">
-        <button class= "btn btn-default">Soumettre mon nouveau commentaire!</button> 
+        <button class= "btn btn-default">Soumettre mon nouveau commentaire!</button>
       </div>
 
       <div class = "form-group">
-        <%= link_to 'Supprimer le commentaire', gossip_comment_path(@gossip, @comment), method: :delete, class: "btn btn-danger" %> 
+        <!-- On fait appel au path qui nous permet de retrouver le commentaire que l'on veut supprimer (en indiquant deux paramètres, le gossip et le comment) et on lui applique la méthode delete. -->
+        <%= link_to 'Supprimer le commentaire', gossip_comment_path(@gossip, @comment), method: :delete, class: "btn btn-danger" %>
       </div>
-      
-<!-- On fait appel au path qui nous permet de retrouver le commentaire que l'on veut supprimer (en indiquant deux paramètres, le gossip et le comment) et on lui applique la méthode delete. -->
+
     <% end %>
 
 </div>

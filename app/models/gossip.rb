@@ -1,11 +1,14 @@
 class Gossip < ApplicationRecord
-	validates :content, presence: true
-	has_many :comments, dependent: :destroy
-	belongs_to :moussaillon
+  belongs_to :moussaillon
+
+  # Un gossip peut avoir plein de commentaires differents
+  #
+  # La condition dependent: :destroy permet de supprimer les commentaires
+  # associes a des gossips lorsque l'on supprime ces derniers.
+  has_many :comments, dependent: :destroy
+
+  # Grace a nos conditions de validation, un user doit indiquer:
+  # son nom et un contenu.
+  validates :moussaillon, presence: true
+  validates :content, presence: true
 end
-
-#Grâce à nos conditions de validation, un user doit indiquer son nom et un contenu
-
-#Un gossip peut avoir plein de commentaires différents
-
-#La condition dependent: :destroy permet de supprimer, sur le site et la BDD, les commentaires des gossips supprimés 
