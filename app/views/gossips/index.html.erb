@@ -1,6 +1,7 @@
 <body>
 
-<!-- ################################# PAGE DE PRESENTATION ################################### -->
+<!-- ################################# AFFICHAGE DE L'INDEX ################################### -->
+
 
 	<div class="center jumbotron">
 
@@ -10,14 +11,22 @@
 	</div>
 
 
-<!-- ################################# AFFICHAGE DE L'INDEX ################################### -->
-
 	<% @gossips.each do |gossip| %>
 
 		<dl style="margin-left: 30px;">
-		    <dt>Gossip posté par <%= gossip.anonymous_author %> (<%= gossip.comments.count %> comments):</dt>
+
+		    <dt>Gossip posté par <%= Moussaillon.find(gossip.moussaillon_id).anonymous_username %> (<%= gossip.comments.count %> comments):</dt>
 		    <dd><%= gossip.content %></dd>
+
 	   		<a href= "<%= gossip_path(gossip.id) %>" class="btn btn-primary">Consulter la page du gossip</a><br />
+
+			<!-- Bouton pour supprimer l'article si le current user en est l'auteur -->
+
+	   		<% if current_moussaillon.id == gossip.moussaillon_id %>
+	   			<a href="<%= gossip_path(gossip.id) %>"  class="btn btn-danger" data-method="DELETE" data-confirm="C'est ton dernier mot?">Supprimer le gossip</a><br />
+
+	   		<% end %>
+
 		</dl>
 
 	<% end %>

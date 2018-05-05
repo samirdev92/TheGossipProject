@@ -1,7 +1,7 @@
 class Gossip < ApplicationRecord
-	validates :anonymous_author, presence: true
 	validates :content, presence: true
 	has_many :comments, dependent: :destroy
+	belongs_to :moussaillon
 end
 
 #Grâce à nos conditions de validation, un user doit indiquer son nom et un contenu

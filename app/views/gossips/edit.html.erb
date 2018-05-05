@@ -20,11 +20,6 @@
     <%= form_for @gossip, url: {action: "update"} do |f| %>
 
       <div class = "form-group">
-        Tu veux changer ton nom de super-héros? Vas-y :)<br />
-        <%= f.text_field :anonymous_author %><br />
-      </div>
-
-      <div class = "form-group">
         Si tu veux éditer ton gossip, écris-en un nouveau!<br />
         <%= f.text_area :content %><br />
       </div>

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # authentification
-#gem 'devise'
+gem 'devise'
 #gem 'pundit'
 
 gem 'rails'

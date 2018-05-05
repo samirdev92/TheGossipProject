@@ -1,32 +1,15 @@
 <body>
 
-<!-- La classe center jumbotron d'introduire une mise en page rapide grâce à bootstrap -->
-
   <div class="center jumbotron">
 
     <h1>Bienvenue sur la page du Gossip !</h1>
-
     <h3>Ici, tu vas pouvoir écrire ce qui te passe par la tête, de manière anonyme.</h3> 
 
   </div>
 
-
-<!-- ################################# FORMULAIRE DU GOSSIP ################################### -->
-
-
   <div class = row style="margin-left: 30px;">
 
-<!-- La class row nous permet d'introduire un peu de style à notre formulaire -->
-
-<!-- Ici, on fait un form_for pour chaque instance de notre classe Gossip. Pour chacune de ces instances,
-  on fait appel à l'action Create, qui renvoie à la méthode Patch (de récupération de données depuis un formulaire). Les infos rentrés par l'utilisateur permettent aussi d'updater la BDD. -->
-
-    <%= form_for @gossip, url: {action: "create"} do |f| %>
-
-        <div class = "form-group">
-          Indique ton nom de super-héros que tu seras le seul à connaître :)<br />
-          <%= f.text_field :anonymous_author %><br />
-        </div>
+    <%= form_for @gossip do |f| %>
 
         <div class = "form-group">
           Ecris ici le petit gossip ou mot doux que tu veux adresser:<br />
@@ -34,7 +17,7 @@
         </div>
 
         <div class = "form-group">
-          <button class= "btn btn-default">Soumettre mon formulaire!</button> <!-- ou: <%= f.submit "Submit" %> -->
+          <button class= "btn btn-default">Soumettre mon formulaire!</button> 
         </div>
 
     <% end %>

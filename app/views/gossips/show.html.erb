@@ -1,12 +1,13 @@
 <body>
 
-<!-- ################################# RECAP DU GOSSIP ################################### -->
-
   <div class="center jumbotron">
 
-    <h3>Voici le gossip écrit par <%= @gossip.anonymous_author %>:</h3>
-    <p><strong><%= @gossip.content %></strong></p>
+  <!-- Différence d'affichage du gossip en fonction de si le current user en est l'auteur ou non -->
 
+  <% if current_moussaillon.id == @gossip.moussaillon_id %>
+
+    <h3>Voici ton gossip <%= @gossip_anonymous_author %>:</h3>
+    <p><strong><%= @gossip.content %></strong></p>
 
     <div class = row>
 
@@ -14,30 +15,29 @@
         <a href= "<%= edit_gossip_path %>" class="btn btn-info">Pour éditer le gossip, c'est par là</a><br />
       </div>
 
-  <!-- Ici, on fait appel aux paths que l'on a créées grâce à "resources" dans routes.rb -->
-
       <div class = "col-4">
         <a href= "<%= gossips_path %>" class="btn btn-primary">Revenir à la liste de tous les gossips</a><br />
       </div>
 
     </div>
 
+  <% else %>
+  
+    <h3>Voici le gossip de <%= @gossip_anonymous_author %>:</h3>
+    <p><strong><%= @gossip.content %></strong></p>
+
+  <% end %>
+
   </div>
 
 
-<!-- ################################# CREATION DU COMMENTAIRE ################################### -->
-
-  <h3 style="margin-left: 30px;">Ici, tu vas pouvoir écrire le commentaire que tu veux sur l'article selectionné.</h3>
-
-<!-- Dans le form_for, il faut spécifier ici nos deux variables @gossip et @comment, puisque chaque comment est dépendent d'un article. -->
+  <h3 style="margin-left: 30px;">Ici, tu vas pouvoir écrire le commentaire que tu veux sur cet article.</h3>
 
   <div class = row style="margin-left: 30px;">
 
     <%= form_for [@gossip, @comment] do |f| %>
 
       <%= f.hidden_field :gossip_id, value: @gossip.id %>
-
-<!-- Le f.hidden_field permet d'inclure le gossip_id dans le hash des Params, comme ça dans notre hash "Comment" on aura toutes les infos: gossip_id, anonymous_commentator et body. -->
 
       <div class = "form-group">
         Indique ici ton nom cher commentateur<br />
@@ -58,7 +58,6 @@
   </div>
 
 
-<!-- ################################# AFFICHAGE DES COMMENTAIRES ################################### -->
   
   <h3 style="margin-left: 30px;">Retrouve ici les commentaires déjà postés sur cet article.</h3>
 
@@ -70,10 +69,6 @@
           <a href= "<%=  edit_gossip_comment_path(@gossip.id,comment.id) %>" class="btn btn-primary">Editer le commentaire</a><br />
       </dl>
 
-<!-- Attention, ici aussi il faut préciser dans notre path deux paramètres puisque notre URL d'éditio du commentaire est dépendante à la fois de l'ID du gossip et de celui du commentaire. -->
-
     <% end %>
-
-
 
 </body>

@@ -1,0 +1,39 @@
+<h2>Ici, tu vas pouvoir t'inscrire sur notre site!</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :anonymous_username, "Indique ton ici petit nom secret" %><br />
+    <%= f.text_field :anonymous_username %>
+  </div>
+
+  <div class="field">
+    <%= f.label :username, "Indique ton username officiel cette fois-ci!" %><br />
+    <%= f.text_field :username %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, "Indique ton email" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, "Entre ton MDP" %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> caractères minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, "Re-rentre ton MDP" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Pour Sign up, appuie ici!" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

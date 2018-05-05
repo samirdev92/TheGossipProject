@@ -1,9 +1,9 @@
 <body>
-<div class="center jumbotron">
-  <h1>Bienvenue !</h1>
-  <h3>
-    Ici, tu peux retrouver les moussaillons 🎓
-  </h3>
-  <%= link_to "Enregistre-toi !", '/gossips/new', class: "btn btn-lg btn-primary" %>
-</div>
+	<div class="center jumbotron">
+	    <h1>Bienvenue !</h1>
+	    <h3>Ici, tu peux retrouver les moussaillons 🎓</h3>
+		<%= link_to "Je suis inscris, me connecter.", new_moussaillon_session_path, class: "btn btn-lg btn-primary" %>
+		<%= link_to "Créer un compte", new_moussaillon_registration_path, class: "btn btn-lg btn-primary" %>
+	</div>
 </body>
+

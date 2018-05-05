@@ -1,42 +1,43 @@
 class GossipsController < ApplicationController
 
   def new
-  	@gossip = Gossip.new #Toujours initialiser sa classe
+  	@gossip = Gossip.new
   end
 
   def create
-  	@gossip = Gossip.new(gossip_params) #Chaque nouvelle instance de Gossip est créée grâce à ce que l'utilisateur rentre dans son formulaire, et donc les gossip_params
+  	@gossip = Gossip.new(gossip_params) 
+    @gossip.moussaillon_id = current_moussaillon.id if current_moussaillon
     if @gossip.save
       redirect_to gossip_path(@gossip.id)
     else 
-      redirect_to error_path #page d'erreur si l'enregistrement ne se fait pas i.e. si l'utilisateur n'a pas indiqué son nom ou son gossip
+      redirect_to error_path 
     end
   end
 
   def show
-  	@gossip = Gossip.find(params[:id]) #On affiche ici la page spécifique au gossip choisi, que l'on retrouve grâce à son ID
-    @comment = Comment.new #Lignes nécessaires car on veut afficher les commentaires sur la page du gossip
-    @comments = @gossip.comments #On ne s'intéresse aux comments que du gossip de la page
+  	@gossip = Gossip.find(params[:id])
+    @gossip_anonymous_author = Moussaillon.find(@gossip.moussaillon_id).anonymous_username
+    @comment = Comment.new 
+    @comments = @gossip.comments 
   end
 
   def index
     @gossips = Gossip.all
   end
 
-
   def edit
-    @gossip = Gossip.find(params[:id]) #Permet de s'assurer que l'on édite bien le bon gossip
+    @gossip = Gossip.find(params[:id]) 
   end
 
   def update
-  	@gossip = Gossip.find(params[:id]) #Permet de s'assurer que l'on édite bien le bon gossip
-  	@gossip.update(gossip_params) #update est une méthode prédéfinie du CRUD. On passe les nouveaux params à notre gossip
+  	@gossip = Gossip.find(params[:id]) 
+  	@gossip.update(gossip_params) 
     redirect_to gossip_path(@gossip.id)
   end
 
   def destroy
-  	@gossip = Gossip.find(params[:id]) #Permet de s'assurer que l'on édite bien le bon gossip
-  	@gossip.destroy #destroy est une méthode prédéfinie du CRUD.
+  	@gossip = Gossip.find(params[:id]) 
+  	@gossip.destroy 
   	redirect_to gossips_path
   end
 
@@ -44,7 +45,7 @@ class GossipsController < ApplicationController
   private
 
   def gossip_params 
-	params.require(:gossip).permit(:anonymous_author, :content) #"permit" nous permet de récupérer les params de nos formulaires
+	params.require(:gossip).permit(:content) 
   end
 
 end

@@ -1,9 +1,13 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
-      <li><a href="/">Accueil</a></li>
-      <li><a href="/gossips">Index des gossips</a></li>
-      <li><a href="/gossips/new">Nouveau gossip</a></li>
+    <% if moussaillon_signed_in? %>
+      <li><%= link_to "Sign out", destroy_moussaillon_session_path, method: :delete %></li>
+      <li><%= link_to "Changer mon compte", edit_moussaillon_registration_path %></li>
+      <li><a href="/gossips/new">Créer un nouveau gossip</a></li>
+    <% else %>
+      <h2>The Gossip Project, tous les Gossips de THP </h2>
+    <% end %>
     </ul>
   </div>
 </nav>
